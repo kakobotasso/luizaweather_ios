@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		85563DD91EDB0FE100722B6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DD81EDB0FE100722B6B /* AppDelegate.swift */; };
-		85563DDB1EDB0FE100722B6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DDA1EDB0FE100722B6B /* ViewController.swift */; };
 		85563DDE1EDB0FE100722B6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85563DDC1EDB0FE100722B6B /* Main.storyboard */; };
 		85563DE01EDB0FE200722B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85563DDF1EDB0FE200722B6B /* Assets.xcassets */; };
 		85563DE31EDB0FE200722B6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85563DE11EDB0FE200722B6B /* LaunchScreen.storyboard */; };
+		85563DEB1EDB202A00722B6B /* CitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DEA1EDB202A00722B6B /* CitiesTableViewController.swift */; };
+		85563DED1EDB350000722B6B /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DEC1EDB350000722B6B /* City.swift */; };
+		85563DEF1EDBC34500722B6B /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DEE1EDBC34500722B6B /* Coordinates.swift */; };
+		85563DF11EDBC5B100722B6B /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DF01EDBC5B100722B6B /* Weather.swift */; };
+		85563DF31EDBC82F00722B6B /* Tempeture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DF21EDBC82F00722B6B /* Tempeture.swift */; };
 		D3653B54F30004A643737101 /* Pods_LuizaWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5736367D87B53B1BDCD289FB /* Pods_LuizaWeather.framework */; };
 /* End PBXBuildFile section */
 
@@ -20,11 +24,15 @@
 		5736367D87B53B1BDCD289FB /* Pods_LuizaWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuizaWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85563DD51EDB0FE100722B6B /* LuizaWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuizaWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85563DD81EDB0FE100722B6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		85563DDA1EDB0FE100722B6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		85563DDD1EDB0FE100722B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		85563DDF1EDB0FE200722B6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85563DE21EDB0FE200722B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85563DE41EDB0FE200722B6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85563DEA1EDB202A00722B6B /* CitiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesTableViewController.swift; sourceTree = "<group>"; };
+		85563DEC1EDB350000722B6B /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		85563DEE1EDBC34500722B6B /* Coordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		85563DF01EDBC5B100722B6B /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		85563DF21EDBC82F00722B6B /* Tempeture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tempeture.swift; sourceTree = "<group>"; };
 		A5D57AF60A1DDBE7EE345A14 /* Pods-LuizaWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuizaWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuizaWeather/Pods-LuizaWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,11 +78,15 @@
 			isa = PBXGroup;
 			children = (
 				85563DD81EDB0FE100722B6B /* AppDelegate.swift */,
-				85563DDA1EDB0FE100722B6B /* ViewController.swift */,
 				85563DDC1EDB0FE100722B6B /* Main.storyboard */,
 				85563DDF1EDB0FE200722B6B /* Assets.xcassets */,
 				85563DE11EDB0FE200722B6B /* LaunchScreen.storyboard */,
 				85563DE41EDB0FE200722B6B /* Info.plist */,
+				85563DEA1EDB202A00722B6B /* CitiesTableViewController.swift */,
+				85563DF21EDBC82F00722B6B /* Tempeture.swift */,
+				85563DEC1EDB350000722B6B /* City.swift */,
+				85563DEE1EDBC34500722B6B /* Coordinates.swift */,
+				85563DF01EDBC5B100722B6B /* Weather.swift */,
 			);
 			path = LuizaWeather;
 			sourceTree = "<group>";
@@ -211,8 +223,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85563DDB1EDB0FE100722B6B /* ViewController.swift in Sources */,
 				85563DD91EDB0FE100722B6B /* AppDelegate.swift in Sources */,
+				85563DF31EDBC82F00722B6B /* Tempeture.swift in Sources */,
+				85563DEB1EDB202A00722B6B /* CitiesTableViewController.swift in Sources */,
+				85563DED1EDB350000722B6B /* City.swift in Sources */,
+				85563DEF1EDBC34500722B6B /* Coordinates.swift in Sources */,
+				85563DF11EDBC5B100722B6B /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +394,7 @@
 				85563DE91EDB0FE200722B6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
