@@ -7,19 +7,22 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class Tempeture {
-    var actual: Double!
-    var pressure: Int!
-    var humidity: Int!
-    var min: Int!
-    var max: Int!
+class Tempeture : Mappable {
+    var actual: Double?
+    var pressure: Int?
+    var humidity: Int?
+    var min: Double?
+    var max: Double?
     
-    init(actual: Double, pressure: Int, humidity: Int, min: Int, max: Int) {
-        self.actual = actual
-        self.pressure = pressure
-        self.humidity = humidity
-        self.min = min
-        self.max = max
+    required init?(map: Map) {}
+    
+    func mapping(map: Map){
+        actual <- map["temp"]
+        pressure <- map["pressure"]
+        humidity <- map["humidity"]
+        min <- map["temp_min"]
+        max <- map["temp_min"]
     }
 }

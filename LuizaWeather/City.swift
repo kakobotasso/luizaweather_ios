@@ -7,16 +7,22 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class City {
-    var id: Int!
-    var name: String!
-    var coordinates: Coordinates!
-    var main: Tempeture!
-    var weather: Weather!
+class City : Mappable {
+    var id: Int?
+    var name: String?
+    var coordinates: Coordinates?
+    var main: Tempeture?
+    var weather: [Weather]?
     
-    init(id: Int, name: String){
-        self.id = id
-        self.name = name
+    required init?(map: Map) {}
+    
+    func mapping(map: Map){
+        id <- map["map"]
+        name <- map["name"]
+        coordinates <- map["coord"]
+        main <- map["main"]
+        weather <- map["weather"]
     }
 }

@@ -7,21 +7,16 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectMapper
 
-class Coordinates {
-    var lat: Double!
-    var long: Double!
+class Coordinates : Mappable {
+    var lat: Double?
+    var long: Double?
     
-    init(params: AnyObject) {
-//        for (key, subJson) in params {
-//            print(subJson["lat"])
-//        }
-        
-    }
+    required init?(map: Map){}
     
-    init(lat: Double, long: Double) {
-        self.lat = lat
-        self.long = long
+    func mapping(map: Map){
+        lat <- map["lat"]
+        long <- map["lon"]
     }
 }

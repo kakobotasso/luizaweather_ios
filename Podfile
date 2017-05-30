@@ -3,5 +3,5 @@ use_frameworks!
 
 target 'LuizaWeather' do
   pod 'Alamofire'
-  pod 'SwiftyJSON'
+  pod 'AlamofireObjectMapper'
 end

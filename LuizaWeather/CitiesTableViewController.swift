@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
+import AlamofireObjectMapper
 
 class CitiesTableViewController: UITableViewController {
 
@@ -22,25 +22,18 @@ class CitiesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Alamofire.request(url).responseJSON { (responseData) -> Void in
-            if responseData.result.value != nil {
-                let swiftyJsonVar = JSON(responseData.result.value!)
-                
-                if let itens = swiftyJsonVar["list"].arrayObject {
-                    self.arrayResponse = itens as! [[String: AnyObject]]
-                }
-                
-                self.arrayResponse.forEach { item in
-                    let city = City(
-                                    id: item["id"] as! Int,
-                                    name: item["name"] as! String
-                                )
-                    
-                    self.cities.append(city)
-                    self.tableView.reloadData()
-                
-                }
+        Alamofire.request(url).responseObject { (response: DataResponse<WeatherApiResponse>) in
+            let weatherApiResponse = response.result.value
+            
+            guard let apiResponse = weatherApiResponse else{
+                return
             }
+            
+            if let citiesList = apiResponse.list {
+                self.cities = citiesList
+                self.tableView.reloadData()
+            }
+            
         }
         
     }
@@ -59,9 +52,7 @@ class CitiesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         let city = cities[indexPath.row]
-        cell.textLabel!.text = city.name
-        
-        print(city)
+        cell.textLabel!.text = city.name!
 
         return cell
     }
