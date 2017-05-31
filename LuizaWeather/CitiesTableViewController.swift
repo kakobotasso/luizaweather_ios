@@ -38,11 +38,10 @@ class CitiesTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CityTableViewCell
         let city = cities[indexPath.row]
-        cell.textLabel!.text = city.name!
-
+        
+        cell.drawCity(city: city)
         return cell
     }
     

@@ -19,6 +19,7 @@
 		85563DF11EDBC5B100722B6B /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DF01EDBC5B100722B6B /* Weather.swift */; };
 		85563DF31EDBC82F00722B6B /* Tempeture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DF21EDBC82F00722B6B /* Tempeture.swift */; };
 		855A5A831EDD2653009DE863 /* WeatherApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855A5A821EDD2653009DE863 /* WeatherApiResponse.swift */; };
+		858CC9661EDF7AB0001CACB5 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858CC9651EDF7AB0001CACB5 /* CityTableViewCell.swift */; };
 		D3653B54F30004A643737101 /* Pods_LuizaWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5736367D87B53B1BDCD289FB /* Pods_LuizaWeather.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		85563DF01EDBC5B100722B6B /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		85563DF21EDBC82F00722B6B /* Tempeture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tempeture.swift; sourceTree = "<group>"; };
 		855A5A821EDD2653009DE863 /* WeatherApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherApiResponse.swift; sourceTree = "<group>"; };
+		858CC9651EDF7AB0001CACB5 /* CityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		A5D57AF60A1DDBE7EE345A14 /* Pods-LuizaWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuizaWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuizaWeather/Pods-LuizaWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 			children = (
 				855300E51EDE51070020E3BC /* CitiesMapViewController.swift */,
 				85563DEA1EDB202A00722B6B /* CitiesTableViewController.swift */,
+				858CC9651EDF7AB0001CACB5 /* CityTableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			files = (
 				855300E61EDE51070020E3BC /* CitiesMapViewController.swift in Sources */,
 				85563DD91EDB0FE100722B6B /* AppDelegate.swift in Sources */,
+				858CC9661EDF7AB0001CACB5 /* CityTableViewCell.swift in Sources */,
 				85563DF31EDBC82F00722B6B /* Tempeture.swift in Sources */,
 				85563DEB1EDB202A00722B6B /* CitiesTableViewController.swift in Sources */,
 				85563DED1EDB350000722B6B /* City.swift in Sources */,
