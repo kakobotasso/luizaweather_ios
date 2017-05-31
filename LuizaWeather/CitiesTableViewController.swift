@@ -9,33 +9,22 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import CoreLocation
 
 class CitiesTableViewController: UITableViewController {
 
-    let API_KEY = "4cfaeda48113347d82b8692ae766e1f3"
-    
-    let url = "http://api.openweathermap.org/data/2.5/find?lat=-23.5613068&lon=-46.60373&units=metric&cnt=50&lang=pt&APPID=4cfaeda48113347d82b8692ae766e1f3"
-    
+    // MARK: - Properties
     var cities: [City] = []
     var arrayResponse = [[String: AnyObject]]()
+    var network: NetworkApi!
+    lazy var locationManager = CLLocationManager()
     
+    // MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Alamofire.request(url).responseObject { (response: DataResponse<WeatherApiResponse>) in
-            let weatherApiResponse = response.result.value
-            
-            guard let apiResponse = weatherApiResponse else{
-                return
-            }
-            
-            if let citiesList = apiResponse.list {
-                self.cities = citiesList
-                self.tableView.reloadData()
-            }
-            
-        }
-        
+        requestLocation()
+        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.monitorUserLocation), userInfo: nil, repeats: true)
     }
 
     // MARK: - Table view data source
@@ -55,5 +44,72 @@ class CitiesTableViewController: UITableViewController {
         cell.textLabel!.text = city.name!
 
         return cell
+    }
+    
+    // MARK: - Methods
+    func requestLocation(){
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            
+            switch CLLocationManager.authorizationStatus() {
+            case .authorizedWhenInUse, .authorizedAlways:
+                print("Usuário já autorizou!")
+                monitorUserLocation()
+            case .notDetermined:
+                print("Usuário ainda não autorizou!")
+                locationManager.requestWhenInUseAuthorization()
+            case .denied:
+                print("Usuário não autorizou!")
+            case .restricted:
+                print("O acesso ao GPS está bloqueado")
+            }
+        }
+    }
+    
+    func monitorUserLocation(){
+        locationManager.startUpdatingLocation()
+    }
+    
+    func requestCities(){
+        guard network != nil else {
+            return
+        }
+        
+        Alamofire.request(network.url).responseObject { (response: DataResponse<WeatherApiResponse>) in
+            let weatherApiResponse = response.result.value
+            
+            guard let apiResponse = weatherApiResponse else{
+                return
+            }
+            
+            if let citiesList = apiResponse.list {
+                self.cities = citiesList
+                self.tableView.reloadData()
+            }
+            
+        }
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+extension CitiesTableViewController : CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            print("Acabou de autorizar")
+            monitorUserLocation()
+        default:
+            break
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let coordinates : CLLocationCoordinate2D = manager.location!.coordinate
+        self.network = NetworkApi.init(lat: coordinates.latitude, long: coordinates.longitude)
+        locationManager.stopUpdatingLocation()
+        requestCities()
     }
 }

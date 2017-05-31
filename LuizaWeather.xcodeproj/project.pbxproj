@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		855300E31EDE22260020E3BC /* NetworkApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855300E21EDE22260020E3BC /* NetworkApi.swift */; };
 		85563DD91EDB0FE100722B6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85563DD81EDB0FE100722B6B /* AppDelegate.swift */; };
 		85563DDE1EDB0FE100722B6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85563DDC1EDB0FE100722B6B /* Main.storyboard */; };
 		85563DE01EDB0FE200722B6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85563DDF1EDB0FE200722B6B /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		2F8BB0496678F5E81B351541 /* Pods-LuizaWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuizaWeather.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuizaWeather/Pods-LuizaWeather.release.xcconfig"; sourceTree = "<group>"; };
 		5736367D87B53B1BDCD289FB /* Pods_LuizaWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuizaWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		855300E21EDE22260020E3BC /* NetworkApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkApi.swift; sourceTree = "<group>"; };
 		85563DD51EDB0FE100722B6B /* LuizaWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuizaWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85563DD81EDB0FE100722B6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85563DDD1EDB0FE100722B6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,6 +60,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		855300E11EDE20E20020E3BC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				855A5A821EDD2653009DE863 /* WeatherApiResponse.swift */,
+				85563DF21EDBC82F00722B6B /* Tempeture.swift */,
+				85563DEC1EDB350000722B6B /* City.swift */,
+				85563DEE1EDBC34500722B6B /* Coordinates.swift */,
+				85563DF01EDBC5B100722B6B /* Weather.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		855300E41EDE23380020E3BC /* API */ = {
+			isa = PBXGroup;
+			children = (
+				855300E21EDE22260020E3BC /* NetworkApi.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		85563DCC1EDB0FE000722B6B = {
 			isa = PBXGroup;
 			children = (
@@ -85,11 +107,8 @@
 				85563DE11EDB0FE200722B6B /* LaunchScreen.storyboard */,
 				85563DE41EDB0FE200722B6B /* Info.plist */,
 				85563DEA1EDB202A00722B6B /* CitiesTableViewController.swift */,
-				855A5A821EDD2653009DE863 /* WeatherApiResponse.swift */,
-				85563DF21EDBC82F00722B6B /* Tempeture.swift */,
-				85563DEC1EDB350000722B6B /* City.swift */,
-				85563DEE1EDBC34500722B6B /* Coordinates.swift */,
-				85563DF01EDBC5B100722B6B /* Weather.swift */,
+				855300E41EDE23380020E3BC /* API */,
+				855300E11EDE20E20020E3BC /* Models */,
 			);
 			path = LuizaWeather;
 			sourceTree = "<group>";
@@ -233,6 +252,7 @@
 				85563DEF1EDBC34500722B6B /* Coordinates.swift in Sources */,
 				855A5A831EDD2653009DE863 /* WeatherApiResponse.swift in Sources */,
 				85563DF11EDBC5B100722B6B /* Weather.swift in Sources */,
+				855300E31EDE22260020E3BC /* NetworkApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
