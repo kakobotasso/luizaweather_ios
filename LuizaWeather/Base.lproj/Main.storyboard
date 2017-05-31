@@ -42,7 +42,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="LuizaWeather" id="ycy-WW-d1c">
-                        <barButtonItem key="rightBarButtonItem" title="°C" id="uKe-47-CGb"/>
+                        <barButtonItem key="rightBarButtonItem" title="°F" id="uKe-47-CGb"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHy-sY-h8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -61,6 +61,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="0QH-eN-IQz" kind="relationship" relationship="viewControllers" id="uCw-OK-nIg"/>
+                        <segue destination="Wj9-YC-vil" kind="relationship" relationship="viewControllers" id="Ylc-DT-nNW"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7z3-Su-d50" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -86,8 +87,55 @@
             </objects>
             <point key="canvasLocation" x="1021.6" y="137.18140929535232"/>
         </scene>
+        <!--LuizaWeather-->
+        <scene sceneID="hkh-vI-qhY">
+            <objects>
+                <viewController id="XnC-sr-J82" customClass="CitiesMapViewController" customModule="LuizaWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cyf-me-fE7"/>
+                        <viewControllerLayoutGuide type="bottom" id="kZf-WS-QbW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vGK-m1-n1L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="d3W-XM-shE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="LuizaWeather" id="G6O-jn-Fd9">
+                        <barButtonItem key="rightBarButtonItem" title="°F" id="OaZ-zf-fWV"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xGM-E5-PaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1960.8" y="896.40179910044981"/>
+        </scene>
+        <!--Mapa-->
+        <scene sceneID="VsD-53-K3k">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wj9-YC-vil" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Mapa" image="map_icon" id="Jbq-i4-OFD"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Io4-Oo-7Jc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XnC-sr-J82" kind="relationship" relationship="rootViewController" id="el1-e6-zcM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V3w-xx-8v5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1021.6" y="896.40179910044981"/>
+        </scene>
     </scenes>
     <resources>
         <image name="list_icon" width="16" height="16"/>
+        <image name="map_icon" width="16" height="16"/>
     </resources>
 </document>
