@@ -26,6 +26,12 @@ class CitiesTableViewController: UITableViewController {
         requestLocation()
         Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.monitorUserLocation), userInfo: nil, repeats: true)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.tableView.reloadData()
+    }
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -84,6 +90,13 @@ class CitiesTableViewController: UITableViewController {
             
             if let citiesList = apiResponse.list {
                 self.cities = citiesList
+                
+                let nc = self.tabBarController?.viewControllers?[1] as! UINavigationController
+                if nc.topViewController is CitiesMapViewController {
+                    let map = nc.topViewController as! CitiesMapViewController
+                    map.cities = citiesList
+                }
+                
                 self.tableView.reloadData()
             }
             
@@ -110,5 +123,6 @@ extension CitiesTableViewController : CLLocationManagerDelegate {
         self.network = NetworkApi.init(lat: coordinates.latitude, long: coordinates.longitude)
         locationManager.stopUpdatingLocation()
         requestCities()
+        print("chamei a api")
     }
 }

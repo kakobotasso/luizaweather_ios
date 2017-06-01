@@ -11,8 +11,12 @@ import MapKit
 
 class CitiesMapViewController: UIViewController {
     
+    var cities : [City]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(cities!)
     }
 
 }
