@@ -14,7 +14,7 @@ class NetworkApi {
     var lat: Double!
     var long: Double!
     
-    init(lat: Double, long: Double) {
+    init(_ lat: Double, _ long: Double) {
         self.lat = lat
         self.long = long
         resetUrl()

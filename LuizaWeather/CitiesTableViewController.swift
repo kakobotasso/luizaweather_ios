@@ -17,7 +17,7 @@ class CitiesTableViewController: UITableViewController {
     var cities: [City] = []
     var arrayResponse = [[String: AnyObject]]()
     var network: NetworkApi!
-    var metricCelsius = true
+    var metric = Metric()
     lazy var locationManager = CLLocationManager()
     
     // MARK: - Outlets
@@ -33,7 +33,6 @@ class CitiesTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         self.tableView.reloadData()
     }
 
@@ -51,7 +50,7 @@ class CitiesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CityTableViewCell
         let city = cities[indexPath.row]
         
-        cell.drawCity(city: city, metricCelsius: metricCelsius)
+        cell.drawCity(city: city, metric: metric)
         return cell
     }
     
@@ -85,7 +84,7 @@ class CitiesTableViewController: UITableViewController {
             return
         }
         
-        if metricCelsius {
+        if metric.getMetric() {
             network.urlWith(units: "metric")
         } else {
             network.urlWith(units: "imperial")
@@ -115,13 +114,8 @@ class CitiesTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func changeMetric(_ sender: Any) {
-        if metricCelsius {
-            btnMetric.title = "°C"
-            metricCelsius = false
-        } else {
-            btnMetric.title = "°F"
-            metricCelsius = true
-        }
+        metric.changeMetric()
+        btnMetric.title = metric.changeMetricText()
         requestCities()
     }
 }
@@ -142,9 +136,9 @@ extension CitiesTableViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let coordinates : CLLocationCoordinate2D = manager.location!.coordinate
-        self.network = NetworkApi.init(lat: coordinates.latitude, long: coordinates.longitude)
+        self.network = NetworkApi.init(coordinates.latitude, coordinates.longitude)
         locationManager.stopUpdatingLocation()
         requestCities()
-        print("chamei a api")
+        print("Coordenadas: \(coordinates.latitude) | \(coordinates.longitude)")
     }
 }

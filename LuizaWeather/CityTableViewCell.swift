@@ -10,7 +10,7 @@ import UIKit
 
 class CityTableViewCell: UITableViewCell {
 
-    
+    // MARK: - Outlets
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var ivClimate: UIImageView!
     @IBOutlet weak var lblClimate: UILabel!
@@ -18,6 +18,11 @@ class CityTableViewCell: UITableViewCell {
     @IBOutlet weak var lblMinTemp: UILabel!
     @IBOutlet weak var lblMaxTemp: UILabel!
     
+    // MARK: - Properties
+    var city : City!
+    var metricText : String!
+    
+    // MARK: - Super methods
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -26,48 +31,50 @@ class CityTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func drawCity(city: City, metricCelsius: Bool){
-        var metric: String!
+    // MARK: - Methods
+    func drawCity(city: City, metric: Metric){
+        self.city = city
+        self.metricText = metric.getMetricText()
         
-        if metricCelsius {
-            metric = "°C"
-        } else{
-            metric = "°F"
-        }
-        
+        drawName()
+        drawTempetures()
+        drawWeather()
+    }
+    
+    private func drawName(){
         if let name = city.name {
             lblName.text = name
         }
+    }
+    
+    private func drawTempetures(){
+        guard let tempeture = city.main else { return }
         
-        if let main = city.main {
-            
-            if let actual = main.actual {
-                lblActualTemp.text = "\(Int(actual))\(metric!)"
-            }
-            
-            if let min = main.min {
-                lblMinTemp.text = "\(Int(min))\(metric!)"
-            }
-            
-            if let max = main.max {
-                lblMaxTemp.text = "\(Int(max))\(metric!)"
-            }
-            
+        if let actual = tempeture.actual {
+            lblActualTemp.text = "\(Int(actual))\(metricText!)"
         }
         
-        if let weatherList = city.weather {
-            let weather = weatherList.first!
-            
-            if let description = weather.description {
-                lblClimate.text = description
-            }
-            
-            if let iconName = weather.icon {
-                ivClimate.image = UIImage(named: iconName)
-            }
-            
+        if let min = tempeture.min {
+            lblMinTemp.text = "\(Int(min))\(metricText!)"
         }
         
+        if let max = tempeture.max {
+            lblMaxTemp.text = "\(Int(max))\(metricText!)"
+        }
+    }
+    
+    private func drawWeather(){
+        guard let weatherList = city.weather else { return }
+        
+        let weather = weatherList.first!
+        
+        if let description = weather.description {
+            lblClimate.text = description
+        }
+        
+        if let iconName = weather.icon {
+            ivClimate.image = UIImage(named: iconName)
+        }
     }
 
 }
