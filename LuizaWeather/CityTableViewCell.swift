@@ -26,7 +26,14 @@ class CityTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func drawCity(city: City){
+    func drawCity(city: City, metricCelsius: Bool){
+        var metric: String!
+        
+        if metricCelsius {
+            metric = "°C"
+        } else{
+            metric = "°F"
+        }
         
         if let name = city.name {
             lblName.text = name
@@ -35,15 +42,15 @@ class CityTableViewCell: UITableViewCell {
         if let main = city.main {
             
             if let actual = main.actual {
-                lblClimate.text = "\(actual) °"
+                lblActualTemp.text = "\(Int(actual))\(metric!)"
             }
             
             if let min = main.min {
-                lblMinTemp.text = "\(min) °"
+                lblMinTemp.text = "\(Int(min))\(metric!)"
             }
             
             if let max = main.max {
-                lblMaxTemp.text = "\(max) °"
+                lblMaxTemp.text = "\(Int(max))\(metric!)"
             }
             
         }

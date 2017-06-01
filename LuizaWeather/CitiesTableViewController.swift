@@ -17,7 +17,11 @@ class CitiesTableViewController: UITableViewController {
     var cities: [City] = []
     var arrayResponse = [[String: AnyObject]]()
     var network: NetworkApi!
+    var metricCelsius = true
     lazy var locationManager = CLLocationManager()
+    
+    // MARK: - Outlets
+    @IBOutlet weak var btnMetric: UIBarButtonItem!
     
     // MARK: - Super Methods
     override func viewDidLoad() {
@@ -47,7 +51,7 @@ class CitiesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CityTableViewCell
         let city = cities[indexPath.row]
         
-        cell.drawCity(city: city)
+        cell.drawCity(city: city, metricCelsius: metricCelsius)
         return cell
     }
     
@@ -81,7 +85,13 @@ class CitiesTableViewController: UITableViewController {
             return
         }
         
-        Alamofire.request(network.url).responseObject { (response: DataResponse<WeatherApiResponse>) in
+        if metricCelsius {
+            network.urlWith(units: "metric")
+        } else {
+            network.urlWith(units: "imperial")
+        }
+        
+        Alamofire.request(network.url!).responseObject { (response: DataResponse<WeatherApiResponse>) in
             let weatherApiResponse = response.result.value
             
             guard let apiResponse = weatherApiResponse else{
@@ -101,6 +111,18 @@ class CitiesTableViewController: UITableViewController {
             }
             
         }
+    }
+    
+    // MARK: - Actions
+    @IBAction func changeMetric(_ sender: Any) {
+        if metricCelsius {
+            btnMetric.title = "°C"
+            metricCelsius = false
+        } else {
+            btnMetric.title = "°F"
+            metricCelsius = true
+        }
+        requestCities()
     }
 }
 
