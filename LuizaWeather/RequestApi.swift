@@ -11,13 +11,16 @@ import Alamofire
 import AlamofireObjectMapper
 
 class RequestApi {
+    // MARK: - Properties
     var network: NetworkApi!
     var cities : [City] = []
     
+    // MARK: - Initializers
     init(network: NetworkApi) {
         self.network = network
     }
     
+    // MARK: - Methods
     func requestCities(metric: Metric, completionHandler : @escaping ([City]) -> Void){
         guard network != nil else { return }
         

@@ -11,13 +11,16 @@ import ObjectMapper
 
 class WeatherApiResponse : Mappable {
     
+    // MARK: - Properties
     var message: String?
     var cod: String?
     var count: Int?
     var list: [City]?
 
+    // MARK: - Initializers
     required init?(map: Map) {}
     
+    // MARK: - Methods
     func mapping(map: Map){
         message <- map["message"]
         cod <- map["cod"]

@@ -10,14 +10,18 @@ import Foundation
 import ObjectMapper
 
 class City : Mappable {
+    
+    // MARK: - Properties
     var id: Int?
     var name: String?
     var coordinates: Coordinates?
     var main: Tempeture?
     var weather: [Weather]?
     
+    // MARK: - Initializers
     required init?(map: Map) {}
     
+    // MARK: - Methods
     func mapping(map: Map){
         id <- map["map"]
         name <- map["name"]

@@ -9,14 +9,18 @@
 import Foundation
 
 class Metric {
+    
+    // MARK: - Properties
     var metricCelsius: Bool!
     let KEY = "metric"
     
+    // MARK: - Initializers
     init() {
         metricCelsius = true
         setDefaultMetric(metricCelsius)
     }
     
+    // MARK: - Methods
     func changeMetric(){
         if metricCelsius {
             metricCelsius = false

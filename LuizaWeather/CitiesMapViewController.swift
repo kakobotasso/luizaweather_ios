@@ -41,7 +41,7 @@ class CitiesMapViewController: UIViewController {
     
     // MARK: - Methods
     func requestLocation() {
-        // Verifica se é possivel trabalhar com servicos de localização
+        
         if CLLocationManager.locationServicesEnabled(){
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -103,22 +103,19 @@ class CitiesMapViewController: UIViewController {
     }
 }
 
-// MARK: MKMapViewDelegate
+// MARK: - MKMapViewDelegate
 extension CitiesMapViewController: MKMapViewDelegate {
     
-    // É chamado sempre que uma annotation (pin) for exibida
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationView: MKAnnotationView!
         
         if annotation is MKPinAnnotationView {
-            // Aqui ele reutiliza pins já criados
             annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "CityPin") as! MKPinAnnotationView
             
             if annotationView == nil{
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "CityPin")
-                annotationView.canShowCallout = true // Exibe o title e o subtitle
-                (annotationView as! MKPinAnnotationView).pinTintColor = .blue // Muda cor
-                (annotationView as! MKPinAnnotationView).animatesDrop = true // Faz animacao de cair o pin na tela
+                annotationView.canShowCallout = true
+                (annotationView as! MKPinAnnotationView).animatesDrop = true
             }else{
                 annotationView.annotation = annotation
             }
@@ -129,7 +126,7 @@ extension CitiesMapViewController: MKMapViewDelegate {
     
 }
 
-// MARK: CLLocationManagerDelegate
+// MARK: - CLLocationManagerDelegate
 extension CitiesMapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
@@ -148,6 +145,6 @@ extension CitiesMapViewController: CLLocationManagerDelegate {
         mapView.setRegion(region, animated: true)
         
         network = NetworkApi.init(userLocation.coordinate.latitude, userLocation.coordinate.longitude)
-        print("coiso")
+        print("Coordenadas Mapa: \(userLocation.coordinate.latitude)  \(userLocation.coordinate.longitude)")
     }
 }

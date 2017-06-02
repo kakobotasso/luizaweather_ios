@@ -10,13 +10,17 @@ import Foundation
 import ObjectMapper
 
 class Weather : Mappable{
+    
+    // MARK: - Properties
     var id: Int?
     var main: String?
     var description: String?
     var icon: String?
     
+    // MARK: - Initializers
     required init?(map: Map) {}
     
+    // MARK: - Methods
     func mapping(map: Map){
         id <- map["id"]
         main <- map["main"]

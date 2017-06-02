@@ -21,7 +21,7 @@ class CitiesTableViewController: UITableViewController {
     // MARK: - Outlets
     @IBOutlet weak var btnMetric: UIBarButtonItem!
     
-    // MARK: - Super Methods
+    // MARK: - Super methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
