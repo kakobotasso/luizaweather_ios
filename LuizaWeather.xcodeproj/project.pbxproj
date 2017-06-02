@@ -124,16 +124,32 @@
 		85563DD71EDB0FE100722B6B /* LuizaWeather */ = {
 			isa = PBXGroup;
 			children = (
-				85563DD81EDB0FE100722B6B /* AppDelegate.swift */,
-				85563DDC1EDB0FE100722B6B /* Main.storyboard */,
+				85AA26F41EE1375C007F2543 /* Delegates */,
+				85AA26F31EE13705007F2543 /* Layouts */,
 				855300E71EDE51320020E3BC /* ViewControllers */,
-				85563DDF1EDB0FE200722B6B /* Assets.xcassets */,
-				85563DE11EDB0FE200722B6B /* LaunchScreen.storyboard */,
 				85563DE41EDB0FE200722B6B /* Info.plist */,
 				855300E41EDE23380020E3BC /* API */,
 				855300E11EDE20E20020E3BC /* Models */,
 			);
 			path = LuizaWeather;
+			sourceTree = "<group>";
+		};
+		85AA26F31EE13705007F2543 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				85563DDC1EDB0FE100722B6B /* Main.storyboard */,
+				85563DDF1EDB0FE200722B6B /* Assets.xcassets */,
+				85563DE11EDB0FE200722B6B /* LaunchScreen.storyboard */,
+			);
+			name = Layouts;
+			sourceTree = "<group>";
+		};
+		85AA26F41EE1375C007F2543 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				85563DD81EDB0FE100722B6B /* AppDelegate.swift */,
+			);
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 		F61A3832C568A35A5E2D7038 /* Pods */ = {
