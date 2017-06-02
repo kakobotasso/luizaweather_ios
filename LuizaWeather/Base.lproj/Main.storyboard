@@ -160,20 +160,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="d3W-XM-shE">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="d3W-XM-shE">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="d3W-XM-shE" secondAttribute="trailing" id="MFN-GI-uA6"/>
+                            <constraint firstItem="d3W-XM-shE" firstAttribute="top" secondItem="Cyf-me-fE7" secondAttribute="bottom" id="RW4-19-ofI"/>
+                            <constraint firstItem="d3W-XM-shE" firstAttribute="leading" secondItem="vGK-m1-n1L" secondAttribute="leading" id="cyG-xY-BHP"/>
+                            <constraint firstItem="kZf-WS-QbW" firstAttribute="top" secondItem="d3W-XM-shE" secondAttribute="bottom" id="j7o-yO-Pzh"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="LuizaWeather" id="G6O-jn-Fd9">
-                        <barButtonItem key="rightBarButtonItem" title="°F" id="OaZ-zf-fWV"/>
+                        <barButtonItem key="rightBarButtonItem" title="°F" id="OaZ-zf-fWV">
+                            <connections>
+                                <action selector="changeMetric:" destination="XnC-sr-J82" id="nR4-aI-n28"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnMetric" destination="OaZ-zf-fWV" id="eus-r0-Z4z"/>
+                        <outlet property="mapView" destination="d3W-XM-shE" id="9Ll-1h-xY6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xGM-E5-PaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1960.8" y="896.40179910044981"/>
+            <point key="canvasLocation" x="1959.375" y="895.77464788732391"/>
         </scene>
         <!--Mapa-->
         <scene sceneID="VsD-53-K3k">

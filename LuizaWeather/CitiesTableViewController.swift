@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import AlamofireObjectMapper
 import CoreLocation
 
 class CitiesTableViewController: UITableViewController {
@@ -28,13 +26,15 @@ class CitiesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         requestLocation()
-        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.monitorUserLocation), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.monitorUserLocation), userInfo: nil, repeats: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tableView.reloadData()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        btnMetric.title = metric.changeMetricText()
+        requestLocation()
     }
+    
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -80,35 +80,20 @@ class CitiesTableViewController: UITableViewController {
     }
     
     func requestCities(){
-        guard network != nil else {
-            return
+        let api = RequestApi.init(network: network)
+        api.requestCities(metric: metric) { response in
+            self.cities = response
+            self.sendObjectsToMap()
+            self.tableView.reloadData()
         }
-        
-        if metric.getMetric() {
-            network.urlWith(units: "metric")
-        } else {
-            network.urlWith(units: "imperial")
-        }
-        
-        Alamofire.request(network.url!).responseObject { (response: DataResponse<WeatherApiResponse>) in
-            let weatherApiResponse = response.result.value
-            
-            guard let apiResponse = weatherApiResponse else{
-                return
-            }
-            
-            if let citiesList = apiResponse.list {
-                self.cities = citiesList
-                
-                let nc = self.tabBarController?.viewControllers?[1] as! UINavigationController
-                if nc.topViewController is CitiesMapViewController {
-                    let map = nc.topViewController as! CitiesMapViewController
-                    map.cities = citiesList
-                }
-                
-                self.tableView.reloadData()
-            }
-            
+    }
+    
+    func sendObjectsToMap(){
+        let nc = self.tabBarController?.viewControllers?[1] as! UINavigationController
+        if nc.topViewController is CitiesMapViewController {
+            let mapVc = nc.topViewController as! CitiesMapViewController
+            mapVc.cities = cities
+            mapVc.metric = metric
         }
     }
     
@@ -136,7 +121,7 @@ extension CitiesTableViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let coordinates : CLLocationCoordinate2D = manager.location!.coordinate
-        self.network = NetworkApi.init(coordinates.latitude, coordinates.longitude)
+        network = NetworkApi.init(coordinates.latitude, coordinates.longitude)
         locationManager.stopUpdatingLocation()
         requestCities()
         print("Coordenadas: \(coordinates.latitude) | \(coordinates.longitude)")
