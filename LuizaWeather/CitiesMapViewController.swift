@@ -13,7 +13,7 @@ class CitiesMapViewController: UIViewController {
     
     // MARK: - Properties
     var cities : [City]?
-    lazy var locationManager = CLLocationManager()
+    lazy var userLocation = UserLocation()
     var metric : Metric!
     var network : NetworkApi!
     
@@ -25,12 +25,9 @@ class CitiesMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapView.mapType = .standard
-        mapView.delegate = self
-        mapView.showsUserLocation = true
-        
-        requestLocation()
-        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.addCitiesToMap), userInfo: nil, repeats: true)
+        configureMapView()
+        userLocation.requestLocation(viewController: self)
+        setTimer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,25 +37,14 @@ class CitiesMapViewController: UIViewController {
     }
     
     // MARK: - Methods
-    func requestLocation() {
-        
-        if CLLocationManager.locationServicesEnabled(){
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            
-            switch CLLocationManager.authorizationStatus() {
-            case .authorizedWhenInUse, .authorizedAlways:
-                print("Usuário já autorizou!")
-                monitorUserLocation()
-            case .notDetermined:
-                print("Usuário ainda não autorizou!")
-                locationManager.requestWhenInUseAuthorization()
-            case .denied:
-                print("Usuário não autorizou!")
-            case .restricted:
-                print("O acesso ao GPS está bloqueado")
-            }
-        }
+    func configureMapView(){
+        mapView.mapType = .standard
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+    }
+    
+    func setTimer(){
+        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.addCitiesToMap), userInfo: nil, repeats: true)
     }
     
     func addCitiesToMap(){
@@ -84,10 +70,6 @@ class CitiesMapViewController: UIViewController {
     func removePinCities(){
         let allAnotations = mapView.annotations
         mapView.removeAnnotations(allAnotations)
-    }
-    
-    func monitorUserLocation(){
-        locationManager.startUpdatingLocation()
     }
 
     // MARK: - Actions
@@ -133,7 +115,7 @@ extension CitiesMapViewController: CLLocationManagerDelegate {
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
             print("Acabou de autorizar")
-            monitorUserLocation()
+            userLocation.monitorUserLocation()
         default:
             break
         }

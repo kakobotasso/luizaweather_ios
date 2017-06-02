@@ -16,7 +16,7 @@ class CitiesTableViewController: UITableViewController {
     var arrayResponse = [[String: AnyObject]]()
     var network: NetworkApi!
     var metric = Metric()
-    lazy var locationManager = CLLocationManager()
+    lazy var userLocation = UserLocation()
     
     // MARK: - Outlets
     @IBOutlet weak var btnMetric: UIBarButtonItem!
@@ -25,14 +25,14 @@ class CitiesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestLocation()
-        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.monitorUserLocation), userInfo: nil, repeats: true)
+        userLocation.requestLocation(viewController: self)
+        setTimer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         btnMetric.title = metric.changeMetricText()
-        requestLocation()
+        userLocation.requestLocation(viewController: self)
     }
     
 
@@ -55,28 +55,12 @@ class CitiesTableViewController: UITableViewController {
     }
     
     // MARK: - Methods
-    func requestLocation(){
-        if CLLocationManager.locationServicesEnabled(){
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            
-            switch CLLocationManager.authorizationStatus() {
-            case .authorizedWhenInUse, .authorizedAlways:
-                print("Usuário já autorizou!")
-                monitorUserLocation()
-            case .notDetermined:
-                print("Usuário ainda não autorizou!")
-                locationManager.requestWhenInUseAuthorization()
-            case .denied:
-                print("Usuário não autorizou!")
-            case .restricted:
-                print("O acesso ao GPS está bloqueado")
-            }
-        }
+    func setTimer(){
+        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.monitorUser), userInfo: nil, repeats: true)
     }
     
-    func monitorUserLocation(){
-        locationManager.startUpdatingLocation()
+    func monitorUser(){
+        userLocation.monitorUserLocation()
     }
     
     func requestCities(){
@@ -112,7 +96,7 @@ extension CitiesTableViewController : CLLocationManagerDelegate {
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
             print("Acabou de autorizar")
-            monitorUserLocation()
+            userLocation.monitorUserLocation()
         default:
             break
         }
@@ -121,9 +105,11 @@ extension CitiesTableViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let coordinates : CLLocationCoordinate2D = manager.location!.coordinate
+        
         network = NetworkApi.init(coordinates.latitude, coordinates.longitude)
-        locationManager.stopUpdatingLocation()
+        userLocation.stopMonitorUserLocation()
         requestCities()
+        
         print("Coordenadas: \(coordinates.latitude) | \(coordinates.longitude)")
     }
 }
